@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import './App.css'
 import type { CountryType } from './type';
-import Countries from './components/Countries';
+import Countries from './components/Countries/Countries';
 
 
 // step-1: create a promise to load data 
