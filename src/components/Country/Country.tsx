@@ -4,9 +4,10 @@ import './Country.css';
 
 export interface CountryProps {
     country: CountryType
+    handleVisitedCountry: (country: CountryType) => void
 }
 
-export default function Country({ country }: CountryProps) {
+export default function Country({ country, handleVisitedCountry }: CountryProps) {
     const [visited, setVisited] = useState<boolean>(false);
 
     const handleVisited = () => {
@@ -18,7 +19,8 @@ export default function Country({ country }: CountryProps) {
         //     setVisited(true);
         // }
 
-        setVisited(!visited)
+        setVisited(!visited);
+        handleVisitedCountry(country);
     }
     // const countryStyle = {
     //     backgroundColor: visited ? 'lightgreen' : 'white'
