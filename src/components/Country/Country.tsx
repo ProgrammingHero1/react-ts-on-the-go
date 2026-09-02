@@ -4,10 +4,11 @@ import './Country.css';
 
 export interface CountryProps {
     country: CountryType
-    handleVisitedCountry: (country: CountryType) => void
+    handleVisitedCountry: (country: CountryType) => void,
+    handleVisitedFlag: (flag: string) => void
 }
 
-export default function Country({ country, handleVisitedCountry }: CountryProps) {
+export default function Country({ country, handleVisitedCountry, handleVisitedFlag }: CountryProps) {
     const [visited, setVisited] = useState<boolean>(false);
 
     const handleVisited = () => {
@@ -26,7 +27,7 @@ export default function Country({ country, handleVisitedCountry }: CountryProps)
     //     backgroundColor: visited ? 'lightgreen' : 'white'
     // }
     return (
-        <div className={`country ${visited ? 'country-visited' : '' }`}>
+        <div className={`country ${visited ? 'country-visited' : ''}`}>
             <h3>{country.name.common}</h3>
             <img src={country.flags.flags.png} alt={country.flags.flags.alt} />
             <p className={`${visited && 'population-known'}`}>Population: </p>
@@ -34,6 +35,9 @@ export default function Country({ country, handleVisitedCountry }: CountryProps)
             <button onClick={handleVisited}>
                 {visited ? 'Visited' : 'Mark as Visited'}
             </button>
+            <button
+                onClick={() => handleVisitedFlag(country.flags.flags.png)}
+            >Add Flag as visited</button>
         </div>
     )
 }
