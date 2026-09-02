@@ -15,8 +15,22 @@ export default function Countries({ countriesPromise }: CountriesProps) {
     const countries = use(countriesPromise);
 
     const handleVisitedCountry = (country: CountryType): void => {
-        const newVisitedCountries = [...visitedCountries, country];
-        setVisitedCountries(newVisitedCountries);
+
+        // bad way to check object/array check.
+        // visitedCountries.includes(country)
+
+        // good way to check
+        const exists = visitedCountries.find(c => c.ccn3.ccn3 === country.ccn3.ccn3);
+        if (exists) {
+            const remainingCountries = visitedCountries.filter(c => c.ccn3.ccn3 !== country.ccn3.ccn3);
+            setVisitedCountries(remainingCountries);
+        }
+        else {
+            const newVisitedCountries = [...visitedCountries, country];
+            setVisitedCountries(newVisitedCountries);
+        }
+
+
     }
 
     const handleVisitedFlag = (flag: string): void => {
@@ -38,6 +52,16 @@ export default function Countries({ countriesPromise }: CountriesProps) {
             <h2>Countries: {countries.length} </h2>
             <h4>Visited Countries: {visitedCountries.length}</h4>
             <h4>Visited Flags: {visitedFlags.length}</h4>
+            <div>
+                <ul>
+                    {visitedCountries.map(country => <li>{country.name.common}</li>)}
+                </ul>
+            </div>
+            <div className='visited-flags'>
+                {
+                    visitedFlags.map(flag => <img src={flag} alt="Visited Flag" />)
+                }
+            </div>
             <div className='countries'>
                 {
                     countries.map(country => <Country
